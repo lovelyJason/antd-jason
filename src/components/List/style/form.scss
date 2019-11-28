@@ -1,0 +1,13 @@
+.list-form {
+    padding: 0 50px;
+    .row {
+        // display: flex;
+        // flex-wrap: wrap;
+        .ant-row {
+            // width: 33%;
+            label {
+                font-weight: 600;
+            }
+        }
+    }
+}
