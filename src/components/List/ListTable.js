@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table } from 'antd'
-import './style/table.scss'
+import './style/table.less'
 
 class ListTable extends React.Component {
     constructor(props) {

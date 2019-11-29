@@ -45,6 +45,10 @@ class Plugin extends React.Component {
             this.props.form.setFieldsValue({'odd': '1511541'})
         })
     }
+  	// 绑定antd form api
+    getFormApis(func) {
+        // this.listForm = func
+    }
     render() {
         // const { getFieldDecorator } = this.listForm
         return (
@@ -74,6 +78,8 @@ const mapStateToProps = (state) => {
 }
 // export default Plugin
 export default connect(mapStateToProps, null)(Plugin)
+
+// 要在路由中导入Provieder并传递store
 ```
 
 ## api
@@ -84,13 +90,13 @@ export default connect(mapStateToProps, null)(Plugin)
 
 |       参数       |                             说明                             |          类型           | 默认值 |
 | :--------------: | :----------------------------------------------------------: | :---------------------: | :----: |
-|     formType     |               表单控件类型,1为Input,2为Select                |                         |        |
-| showSelectOption |          自动发送ajax请求或者设置固定值给Select组件          |          Array          |        |
-|   getTableData   |   筛选查询按钮自动触发该回调,参数一为表格渲染所需的数据源    | function(list,callback) |        |
-|     onSubmit     | 筛选查询网络请求的参数,已经自动搜集了fieldsValue进行了提交,也可手动传入 |         Object          |        |
-|   getFormApis    | 如有必要调用antd的表单api,如setFieldsValue,validateFields等,可以通过该函数获取,将form对象传入回调 |     function(apis)      |        |
+|     formType     |               表单控件类型,1为Input,2为Select                |                         |   是   |
+| showSelectOption |          自动发送ajax请求或者设置固定值给Select组件          |          Array          |   否   |
+|   getTableData   |   筛选查询按钮自动触发该回调,参数一为表格渲染所需的数据源    | function(list,callback) |   是   |
+|     onSubmit     | 筛选查询网络请求的参数,已经自动搜集了fieldsValue进行了提交,也可手动传入 |         Object          |   是   |
+|   getFormApis    | 如有必要调用antd的表单api,如setFieldsValue,validateFields等,可以通过该函数获取,将form对象传入回调 |     function(apis)      |   否   |
 
-注意: 组件自身状态依赖于redux.获取组件原生的antd form api还可通过react-redux的connetc将form api映射到props上,如
+注意: 组件自身状态依赖于redux.获取组件原生的antd form api还可通过react-redux的connect将form api映射到props上,如
 
 ```jsx
 const mapStateToProps = (state) => {
@@ -103,4 +109,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, null)(Com)
 ```
 
-此时j就可以通过this.props调用组件内部api,推荐此写法# antd-jason
+此时就可以通过this.props调用组件内部api

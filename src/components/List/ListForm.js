@@ -1,13 +1,11 @@
 import React from 'react'
 import { Form, Input, Select, TreeSelect, Button, Row, Col, message } from 'antd'
-import './style/form.scss'
-// import context from './context'
+import './style/form.less'
 import store from './store'
-import { connect } from 'react-redux'
 
 const FormItem = Form.Item
 
-@Form.create()
+// @Form.create()
 class ListForm extends React.Component {
     constructor(props) {
         super(props)
@@ -19,7 +17,7 @@ class ListForm extends React.Component {
     }
     static listFormStore = store
     componentDidMount() {
-        console.log('form mounted')
+        // console.log('form mounted')
         // 导出api
         this.props.getFormApis ? this.props.getFormApis(this.props.form) : void(0)
         // 获取下拉列表
@@ -27,7 +25,6 @@ class ListForm extends React.Component {
 
     }
     componentWillMount() {
-        console.log('form willMount')
         const action = {
             type: 'transmit_form_api',
             value: this.props.form
@@ -35,7 +32,7 @@ class ListForm extends React.Component {
         store.dispatch(action)
     }
     componentDidUpdate() {
-        console.log('form updated')
+        // console.log('form updated')
     }
     // 获取select列表
     getSelectList() {
@@ -95,9 +92,7 @@ class ListForm extends React.Component {
     }
     // debugger
     handleClick() {
-        console.log(this.props.form.validateFields)
         this.props.form.validateFields((errors, values) => {
-            console.log(errors, values)
             if (errors) return
 
         })
@@ -132,6 +127,7 @@ class ListForm extends React.Component {
             },
         };
         const formType = this.props.formType
+        if(!formType) return console.warn('请传入formType')
         let formItems = formType.map((val, index) => {
             return (
                 <Col xs={24} sm={12} md={8} key={index}>
@@ -174,4 +170,6 @@ class ListForm extends React.Component {
 }
 
 // export default connect(mapStateToProps,mapDispatchToProps)(ListForm)
+// export default ListForm
+ListForm = Form.create()(ListForm)
 export default ListForm
